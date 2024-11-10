@@ -13,6 +13,10 @@
             background-color: black;
             color: red;
             font-family: monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         /* تنظیمات برای ساخت افکت سه‌بعدی اعداد */
@@ -34,15 +38,40 @@
             opacity: 0.8;
             transform: perspective(500px) rotateX(30deg);
         }
+
+        /* تنظیمات دکمه دانلود */
+        .download-button {
+            position: relative;
+            background-color: black;
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 10;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .download-button:hover {
+            background-color: #ff0000;
+            color: black;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
     <div class="matrix"></div>
 
+    <!-- دکمه دانلود در وسط صفحه -->
+    <a href="https://github.com/Mahdiklidari/dark/raw/main/BK.pptx" class="download-button" download>BK</a>
+
     <script>
         const matrixContainer = document.querySelector('.matrix');
         const digits = "01";
-        const columns = Math.floor(window.innerWidth / 15);  // تعداد ستون‌ها بیشتر شده
+        const columns = Math.floor(window.innerWidth / 15);
         const rows = Math.floor(window.innerHeight / 15);
 
         for (let i = 0; i < columns; i++) {
@@ -69,10 +98,10 @@
 
                 setTimeout(() => {
                     digit.remove();
-                }, 800); // زمان کمتر شده تا اعداد سریع‌تر از بین بروند
+                }, 800);
             };
             
-            setInterval(drop, 30);  // فاصله‌ی زمانی کمتر برای افزایش تراکم اعداد
+            setInterval(drop, 30);
         }
     </script>
 </body>
