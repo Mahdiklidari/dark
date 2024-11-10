@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه وب هکری با افکت باران اعداد</title>
+    <style>
+        /* تنظیمات صفحه و پس‌زمینه */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+            color: red;
+            font-family: monospace;
+        }
+
+        /* تنظیمات برای ساخت افکت سه‌بعدی اعداد */
+        .matrix {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .digit {
+            font-size: 18px;
+            text-shadow: 0 0 8px rgba(255, 0, 0, 0.8), 0 0 16px rgba(255, 0, 0, 0.6);
+            position: absolute;
+            opacity: 0.8;
+            transform: perspective(500px) rotateX(30deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix"></div>
+
+    <script>
+        const matrixContainer = document.querySelector('.matrix');
+        const digits = "01";
+        const columns = Math.floor(window.innerWidth / 20);
+        const rows = Math.floor(window.innerHeight / 20);
+
+        for (let i = 0; i < columns; i++) {
+            const column = document.createElement('div');
+            column.style.position = 'absolute';
+            column.style.left = `${i * 20}px`;
+            matrixContainer.appendChild(column);
+
+            let position = Math.floor(Math.random() * rows) * -20;
+            
+            const drop = () => {
+                const digit = document.createElement('div');
+                digit.classList.add('digit');
+                digit.textContent = digits[Math.floor(Math.random() * digits.length)];
+                digit.style.top = `${position}px`;
+                digit.style.left = `${i * 20}px`;
+                matrixContainer.appendChild(digit);
+
+                position += 20;
+
+                if (position > window.innerHeight) {
+                    position = Math.floor(Math.random() * rows) * -20;
+                }
+
+                setTimeout(() => {
+                    digit.remove();
+                }, 1000);
+            };
+            
+            setInterval(drop, 50);
+        }
+    </script>
+</body>
+</html>
