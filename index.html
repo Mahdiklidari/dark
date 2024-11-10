@@ -28,7 +28,7 @@
         }
 
         .digit {
-            font-size: 18px;
+            font-size: 16px;
             text-shadow: 0 0 8px rgba(255, 0, 0, 0.8), 0 0 16px rgba(255, 0, 0, 0.6);
             position: absolute;
             opacity: 0.8;
@@ -42,37 +42,37 @@
     <script>
         const matrixContainer = document.querySelector('.matrix');
         const digits = "01";
-        const columns = Math.floor(window.innerWidth / 20);
-        const rows = Math.floor(window.innerHeight / 20);
+        const columns = Math.floor(window.innerWidth / 15);  // تعداد ستون‌ها بیشتر شده
+        const rows = Math.floor(window.innerHeight / 15);
 
         for (let i = 0; i < columns; i++) {
             const column = document.createElement('div');
             column.style.position = 'absolute';
-            column.style.left = `${i * 20}px`;
+            column.style.left = `${i * 15}px`;
             matrixContainer.appendChild(column);
 
-            let position = Math.floor(Math.random() * rows) * -20;
+            let position = Math.floor(Math.random() * rows) * -15;
             
             const drop = () => {
                 const digit = document.createElement('div');
                 digit.classList.add('digit');
                 digit.textContent = digits[Math.floor(Math.random() * digits.length)];
                 digit.style.top = `${position}px`;
-                digit.style.left = `${i * 20}px`;
+                digit.style.left = `${i * 15}px`;
                 matrixContainer.appendChild(digit);
 
-                position += 20;
+                position += 15;
 
                 if (position > window.innerHeight) {
-                    position = Math.floor(Math.random() * rows) * -20;
+                    position = Math.floor(Math.random() * rows) * -15;
                 }
 
                 setTimeout(() => {
                     digit.remove();
-                }, 1000);
+                }, 800); // زمان کمتر شده تا اعداد سریع‌تر از بین بروند
             };
             
-            setInterval(drop, 50);
+            setInterval(drop, 30);  // فاصله‌ی زمانی کمتر برای افزایش تراکم اعداد
         }
     </script>
 </body>
